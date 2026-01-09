@@ -11,3 +11,18 @@ sql:
         emit_result_struct_pointers: true
         initialisms:
           - id
+        overrides:
+          - db_type: "uuid"
+            go_type:
+              import: "github.com/google/uuid"
+              type: "UUID"
+          - db_type: "unix_timestamp"
+            go_type:
+              import: "github.com/moroz/go-altcha-video/internal/dbtypes"
+              type: "UnixTimestamp"
+          - db_type: "unix_timestamp"
+            nullable: true
+            go_type:
+              pointer: true
+              import: "github.com/moroz/go-altcha-video/internal/dbtypes"
+              type: "UnixTimestamp"

@@ -4,22 +4,28 @@
 
 package queries
 
+import (
+	"github.com/google/uuid"
+	"github.com/moroz/go-altcha-video/internal/dbtypes"
+)
+
 type Comment struct {
-	ID        int64
-	PostID    int64
+	ID        uuid.UUID
+	PostID    uuid.UUID
 	Body      string
 	Signature string
 	Website   *string
-	CreatedAt int64
-	UpdatedAt int64
+	CreatedAt dbtypes.UnixTimestamp
+	UpdatedAt dbtypes.UnixTimestamp
 }
 
 type Post struct {
-	ID          int64
+	ID          uuid.UUID
+	Author      string
 	Title       string
 	Body        string
 	Slug        string
-	PublishedAt *int64
-	CreatedAt   int64
-	UpdatedAt   int64
+	PublishedAt *dbtypes.UnixTimestamp
+	CreatedAt   dbtypes.UnixTimestamp
+	UpdatedAt   dbtypes.UnixTimestamp
 }

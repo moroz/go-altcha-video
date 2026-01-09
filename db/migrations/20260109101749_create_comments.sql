@@ -1,13 +1,13 @@
 -- +goose Up
 -- +goose StatementBegin
 create table comments (
-  id integer not null primary key,
-  post_id integer not null references posts (id),
+  id uuid not null primary key,
+  post_id uuid not null references posts (id) on delete cascade,
   body text not null,
   signature text not null,
   website text,
-  created_at integer not null default (unixepoch()),
-  updated_at integer not null default (unixepoch())
+  created_at unix_timestamp not null default (unixepoch()),
+  updated_at unix_timestamp not null default (unixepoch())
 );
 
 create index comments_post_id_index on comments (post_id);

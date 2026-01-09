@@ -24,5 +24,5 @@ func GetenvWithDefault(name, defaultValue string) string {
 
 var DatabaseUrl = MustGetenv("DATABASE_URL")
 var Port = GetenvWithDefault("PORT", "3000")
-var BindHost = GetenvWithDefault("BIND_HOST", "::1")
+var BindHost = GetenvWithDefault("BIND_HOST", "::")
 var ListenOn = net.JoinHostPort(BindHost, Port)

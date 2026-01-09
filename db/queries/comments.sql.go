@@ -7,6 +7,8 @@ package queries
 
 import (
 	"context"
+
+	"github.com/google/uuid"
 )
 
 const getCommentCountsForPosts = `-- name: GetCommentCountsForPosts :many
@@ -14,7 +16,7 @@ select c.post_id, count(c.id) from comments c group by 1
 `
 
 type GetCommentCountsForPostsRow struct {
-	PostID int64
+	PostID uuid.UUID
 	Count  int64
 }
 
@@ -42,10 +44,10 @@ func (q *Queries) GetCommentCountsForPosts(ctx context.Context) ([]*GetCommentCo
 }
 
 const getCommentsByPostId = `-- name: GetCommentsByPostId :many
-select id, post_id, body, signature, website, created_at, updated_at from comments where post_id = ? order by created_at desc
+select id, post_id, body, signature, website, created_at, updated_at from comments where post_id = ? order by id desc
 `
 
-func (q *Queries) GetCommentsByPostId(ctx context.Context, postID int64) ([]*Comment, error) {
+func (q *Queries) GetCommentsByPostId(ctx context.Context, postID uuid.UUID) ([]*Comment, error) {
 	rows, err := q.db.QueryContext(ctx, getCommentsByPostId, postID)
 	if err != nil {
 		return nil, err
@@ -74,4 +76,39 @@ func (q *Queries) GetCommentsByPostId(ctx context.Context, postID int64) ([]*Com
 		return nil, err
 	}
 	return items, nil
+}
+
+const insertComment = `-- name: InsertComment :one
+insert into comments (id, post_id, signature, body, website)
+values (?, ?, ?, ?, ?)
+returning id, post_id, body, signature, website, created_at, updated_at
+`
+
+type InsertCommentParams struct {
+	ID        uuid.UUID
+	PostID    uuid.UUID
+	Signature string
+	Body      string
+	Website   *string
+}
+
+func (q *Queries) InsertComment(ctx context.Context, arg InsertCommentParams) (*Comment, error) {
+	row := q.db.QueryRowContext(ctx, insertComment,
+		arg.ID,
+		arg.PostID,
+		arg.Signature,
+		arg.Body,
+		arg.Website,
+	)
+	var i Comment
+	err := row.Scan(
+		&i.ID,
+		&i.PostID,
+		&i.Body,
+		&i.Signature,
+		&i.Website,
+		&i.CreatedAt,
+		&i.UpdatedAt,
+	)
+	return &i, err
 }

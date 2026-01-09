@@ -10,7 +10,7 @@ import (
 )
 
 const getPostBySlug = `-- name: GetPostBySlug :one
-select id, title, body, slug, published_at, created_at, updated_at from posts
+select id, author, title, body, slug, published_at, created_at, updated_at from posts
 where slug = ?
 `
 
@@ -19,6 +19,7 @@ func (q *Queries) GetPostBySlug(ctx context.Context, slug string) (*Post, error)
 	var i Post
 	err := row.Scan(
 		&i.ID,
+		&i.Author,
 		&i.Title,
 		&i.Body,
 		&i.Slug,
@@ -30,7 +31,7 @@ func (q *Queries) GetPostBySlug(ctx context.Context, slug string) (*Post, error)
 }
 
 const listPosts = `-- name: ListPosts :many
-select id, title, body, slug, published_at, created_at, updated_at from posts
+select id, author, title, body, slug, published_at, created_at, updated_at from posts
 where published_at is not null
 order by published_at desc
 `
@@ -46,6 +47,7 @@ func (q *Queries) ListPosts(ctx context.Context) ([]*Post, error) {
 		var i Post
 		if err := rows.Scan(
 			&i.ID,
+			&i.Author,
 			&i.Title,
 			&i.Body,
 			&i.Slug,

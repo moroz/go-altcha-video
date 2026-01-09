@@ -3,6 +3,7 @@ package services
 import (
 	"context"
 
+	"github.com/google/uuid"
 	"github.com/moroz/go-altcha-video/db/queries"
 	"github.com/moroz/go-altcha-video/types"
 )
@@ -56,8 +57,8 @@ func (s *PostService) ListPosts(ctx context.Context) ([]*types.PostListDto, erro
 	return result, nil
 }
 
-func (s *PostService) GetCommentCountsForPosts(ctx context.Context, posts []*queries.Post) (map[int64]int, error) {
-	result := make(map[int64]int)
+func (s *PostService) GetCommentCountsForPosts(ctx context.Context, posts []*queries.Post) (map[uuid.UUID]int, error) {
+	result := make(map[uuid.UUID]int)
 
 	if len(posts) == 0 {
 		return result, nil

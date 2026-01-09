@@ -17,5 +17,8 @@ func Router(db queries.DBTX) *echo.Echo {
 	r.GET("/", blog.Index)
 	r.GET("/blog/:slug", blog.Show)
 
+	comments := CommentController(db)
+	r.POST("/blog/:slug/comments", comments.Create)
+
 	return r
 }
