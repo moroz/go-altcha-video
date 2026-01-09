@@ -6,3 +6,9 @@ go = "latest"
 node = "latest"
 pnpm = "latest"
 prettier = "latest"
+
+[env]
+DATABASE_URL = "./db/dev.db"
+GOOSE_DBSTRING = "{{ env.DATABASE_URL }}"
+GOOSE_MIGRATION_DIR = "db/migrations"
+GOOSE_DRIVER = "sqlite"
