@@ -6,9 +6,25 @@ go = "latest"
 node = "latest"
 pnpm = "latest"
 prettier = "latest"
+sqlite = "latest"
 
 [env]
 DATABASE_URL = "./db/dev.db"
 GOOSE_DBSTRING = "{{ env.DATABASE_URL }}"
 GOOSE_MIGRATION_DIR = "db/migrations"
 GOOSE_DRIVER = "sqlite"
+
+[tasks."db:setup"]
+run = """
+goose up
+mise r db:seed
+"""
+
+[tasks."db:reset"]
+run = """
+rm db/dev.db
+mise r db:setup
+"""
+
+[tasks."db:seed"]
+run = "sqlite3 $DATABASE_URL < db/seeds.sql"

@@ -63,12 +63,7 @@ func (s *PostService) GetCommentCountsForPosts(ctx context.Context, posts []*que
 		return result, nil
 	}
 
-	ids := make([]int64, len(posts))
-	for i, post := range posts {
-		ids[i] = post.ID
-	}
-
-	counts, err := s.queries.GetCommentCountsForPosts(ctx, ids)
+	counts, err := s.queries.GetCommentCountsForPosts(ctx)
 	if err != nil {
 		return nil, err
 	}

@@ -10,9 +10,7 @@ import (
 )
 
 const getCommentCountsForPosts = `-- name: GetCommentCountsForPosts :many
-select c.post_id, count(c.id) from comments c
-where c.post_id = any(?)
-group by 1
+select c.post_id, count(c.id) from comments c group by 1
 `
 
 type GetCommentCountsForPostsRow struct {
@@ -20,8 +18,8 @@ type GetCommentCountsForPostsRow struct {
 	Count  int64
 }
 
-func (q *Queries) GetCommentCountsForPosts(ctx context.Context, any interface{}) ([]*GetCommentCountsForPostsRow, error) {
-	rows, err := q.db.QueryContext(ctx, getCommentCountsForPosts, any)
+func (q *Queries) GetCommentCountsForPosts(ctx context.Context) ([]*GetCommentCountsForPostsRow, error) {
+	rows, err := q.db.QueryContext(ctx, getCommentCountsForPosts)
 	if err != nil {
 		return nil, err
 	}
