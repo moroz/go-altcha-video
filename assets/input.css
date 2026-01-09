@@ -1,2 +1,18 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 @config "./tailwind.config.js";
+
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-lg: 60rem;
+}
+
+@layer base {
+  body {
+    @apply bg-white dark:bg-slate-800 text-black dark:text-white;
+  }
+
+  .prose pre code {
+    @apply whitespace-pre-wrap;
+  }
+}

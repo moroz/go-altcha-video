@@ -11,8 +11,7 @@ import (
 )
 
 func Index(posts []*types.PostListDto) Node {
-	return layout.RootLayout("Blog",
-		H1(Text("Blog")),
+	return layout.BaseLayout("Blog",
 		Map(posts, func(post *types.PostListDto) Node {
 			return Article(
 				H3(

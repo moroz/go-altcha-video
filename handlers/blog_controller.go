@@ -25,3 +25,12 @@ func (me *blogController) Index(c echo.Context) error {
 
 	return blog.Index(posts).Render(c.Response().Writer)
 }
+
+func (me *blogController) Show(c echo.Context) error {
+	post, err := me.PostService.GetPostDetailsBySlug(c.Request().Context(), c.Param("slug"))
+	if err != nil {
+		return err
+	}
+
+	return blog.Show(post).Render(c.Response().Writer)
+}

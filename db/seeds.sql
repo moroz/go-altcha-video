@@ -22,7 +22,9 @@ If you want to follow along this walkthrough, clone the GitHub repository [moroz
 git clone git@github.com:moroz/FullStackAsp.Net-Courses.git -b testing-tutorial
 ```
 
-Disclaimer: This walkthrough is meant for use with a specific project. You may find it useful in other project, but it is not meant as a generic reference or tutorial.'
+Disclaimer: This walkthrough is meant for use with a specific project. You may find it useful in other project, but it is not meant as a generic reference or tutorial.
+
+[^1]: Microsoft. (2025, March 25). *Integration tests in ASP.NET Core*. Microsoft Learn. https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-9.0&pivots=xunit ([Web Archive](https://web.archive.org/web/20250927142022/https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-9.0&pivots=xunit))'
 );
 
 commit;
