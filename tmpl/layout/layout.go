@@ -22,7 +22,7 @@ func BaseLayout(title string, children ...Node) Node {
 	return RootLayout(title,
 		Div(Class("flex flex-col min-h-screen"),
 			Header(
-				Class("bg-slate-100 h-20 dark:bg-slate-700 fixed top-0 left-0 right-0 z-10"),
+				Class("bg-surface h-20 fixed top-0 left-0 right-0 z-10"),
 				Div(
 					Class("container mx-auto flex items-center h-full"),
 					H1(Class("text-3xl font-bold"), A(Href("/"), Text("My Little Blog"))),
@@ -35,7 +35,7 @@ func BaseLayout(title string, children ...Node) Node {
 				),
 			),
 			Footer(
-				Class("bg-slate-100 py-12 dark:bg-slate-700"),
+				Class("py-12 bg-surface"),
 				Div(Class("container mx-auto text-center"),
 					Raw("&copy; 2026 by Karol Moroz. This project is licensed under the BSD-3 license."),
 				),

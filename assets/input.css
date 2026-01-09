@@ -3,16 +3,28 @@
 @config "./tailwind.config.js";
 
 @theme {
-  --breakpoint-*: initial;
-  --breakpoint-lg: 60rem;
+	--breakpoint-*: initial;
+	--breakpoint-lg: 60rem;
+
+	--color-bg: var(--color-white);
+	--color-surface: var(--color-slate-100);
+	--color-border: var(--color-slate-800);
+}
+
+@variant dark {
+	@theme {
+		--color-bg: var(--color-gray-900);
+		--color-surface: var(--color-gray-800);
+		--color-border: var(--color-gray-100);
+	}
 }
 
 @layer base {
-  body {
-    @apply bg-white dark:bg-slate-800 text-black dark:text-white;
-  }
+	body {
+		@apply bg-bg text-black dark:text-white;
+	}
 
-  .prose pre code {
-    @apply whitespace-pre-wrap;
-  }
+	.prose pre code {
+		@apply whitespace-pre-wrap;
+	}
 }
