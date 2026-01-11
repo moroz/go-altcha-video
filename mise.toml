@@ -28,3 +28,6 @@ mise r db:setup
 
 [tasks."db:seed"]
 run = "sqlite3 $DATABASE_URL < db/seeds.sql"
+
+[tasks.format]
+run = "scripts/format-classes.mjs tmpl/**/*.go"

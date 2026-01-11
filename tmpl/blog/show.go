@@ -32,7 +32,7 @@ func CommentForm(post *types.PostDetailsDto) Node {
 	return Form(
 		Action(fmt.Sprintf("/blog/%s/comments", post.Slug)),
 		Method("POST"),
-		Class("space-y-6 my-12"),
+		Class("my-12 space-y-6"),
 		H3(Class("text-3xl font-bold"), Text("Leave a comment on this post")),
 		components.InputField(&components.InputFieldProps{
 			Name:     "signature",
@@ -55,7 +55,7 @@ func CommentForm(post *types.PostDetailsDto) Node {
 		),
 		Button(
 			Type("submit"),
-			Class("w-full bg-primary flex h-12 font-bold text-center items-center justify-center rounded-sm hover:bg-primary-hover cursor-pointer transition-all text-base text-white dark:text-black"),
+			Class("bg-primary hover:bg-primary-hover flex h-12 w-full cursor-pointer items-center justify-center rounded-sm text-center text-base font-bold text-white transition-all dark:text-black"),
 			Text("Submit"),
 		),
 	)
@@ -67,10 +67,10 @@ func CommentSection(post *types.PostDetailsDto) Node {
 		H3(
 			Class("text-3xl font-bold"),
 			Text("Comments"),
-			Span(Class("opacity-80 text-lg"), Text(fmt.Sprintf(" (%v)", len(post.Comments)))),
+			Span(Class("text-lg opacity-80"), Text(fmt.Sprintf(" (%v)", len(post.Comments)))),
 		),
 		If(len(post.Comments) == 0, P(Text("No comments."))),
-		Div(Class("space-y-12 mt-8"),
+		Div(Class("mt-8 space-y-12"),
 			Map(post.Comments, func(comment *queries.Comment) Node {
 				return Article(
 					Class("space-y-2"),
@@ -79,7 +79,7 @@ func CommentSection(post *types.PostDetailsDto) Node {
 						Iff(comment.Website != nil && *comment.Website != "", func() Node {
 							return Group{
 								Text(" ("),
-								A(Class("text-primary underline underline-offset-2 hover:text-primary-hover transition-all"), Href(*comment.Website), Target("_blank"), Rel("noopener noreferrer"), Text("website")),
+								A(Class("text-primary hover:text-primary-hover underline underline-offset-2 transition-all"), Href(*comment.Website), Target("_blank"), Rel("noopener noreferrer"), Text("website")),
 								Text(")"),
 							}
 						}),
@@ -94,8 +94,9 @@ func CommentSection(post *types.PostDetailsDto) Node {
 
 func Show(post *types.PostDetailsDto) Node {
 	return layout.BaseLayout(post.Title,
+		Script(Type("module"), Src("https://esm.sh/altcha@2.3.0/es2022/altcha.mjs")),
 		Header(
-			Class("text-center my-6 opacity-80"),
+			Class("my-6 text-center opacity-80"),
 			P(
 				Text("Published on "),
 				Time(
@@ -105,7 +106,7 @@ func Show(post *types.PostDetailsDto) Node {
 			),
 		),
 		Article(
-			Class("prose lg:prose-xl mx-auto dark:prose-invert max-w-full"),
+			Class("prose lg:prose-xl dark:prose-invert mx-auto max-w-full"),
 			Raw(renderMarkdown(post.Body)),
 		),
 		CommentSection(post),

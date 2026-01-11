@@ -40,7 +40,7 @@ func InputField(props *InputFieldProps) Node {
 			If(props.Type != "", Type(props.Type)),
 			If(props.Required, Required()),
 			Name(props.Name),
-			Class("h-12 border-border border-solid border bg-surface rounded-sm px-3 text-lg outline-0"),
+			Class("border-border bg-surface h-12 rounded-sm border border-solid px-3 text-lg outline-0"),
 		),
 	)
 }

@@ -18,7 +18,7 @@ func Index(posts []*types.PostListDto) Node {
 				Class("space-y-1"),
 				H3(
 					A(
-						Class("text-3xl font-bold hover:underline underline-offset-2 dark:hover:text-blue-500 transition-all"),
+						Class("text-3xl font-bold underline-offset-2 transition-all hover:underline dark:hover:text-blue-500"),
 						Href(fmt.Sprintf("/blog/%s", post.Slug)),
 						Text(post.Title),
 					),
@@ -35,7 +35,7 @@ func Index(posts []*types.PostListDto) Node {
 				),
 				P(
 					A(
-						Class("font-bold hover:underline underline-offset-2 text-blue-500"),
+						Class("font-bold text-blue-500 underline-offset-2 hover:underline"),
 						Href(fmt.Sprintf("/blog/%s", post.Slug)),
 						Text("Read more..."),
 					),

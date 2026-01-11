@@ -13,7 +13,6 @@ func RootLayout(title string, children ...Node) Node {
 			Meta(Name("viewport"), Content("width=device-width, initial-scale=1")),
 			TitleEl(Text(title+" | Altcha Demo")),
 			Link(Rel("stylesheet"), Href("/assets/output.css")),
-			Script(Type("module"), Src("/assets/app.mjs")),
 		),
 		Body(Group(children)),
 	)
@@ -21,22 +20,22 @@ func RootLayout(title string, children ...Node) Node {
 
 func BaseLayout(title string, children ...Node) Node {
 	return RootLayout(title,
-		Div(Class("flex flex-col min-h-screen"),
+		Div(Class("flex min-h-screen flex-col"),
 			Header(
-				Class("bg-surface h-20 fixed top-0 left-0 right-0 z-10"),
+				Class("bg-surface fixed top-0 right-0 left-0 z-10 h-20"),
 				Div(
-					Class("container mx-auto flex items-center h-full"),
+					Class("container mx-auto flex h-full items-center"),
 					H1(Class("text-3xl font-bold"), A(Href("/"), Text("My Little Blog"))),
 				),
 			),
 			Main(Class("flex-1"),
-				Div(Class("container mx-auto pb-16 pt-20"),
-					H2(Class("text-center text-4xl font-bold leading-normal my-8"), Text(title)),
+				Div(Class("container mx-auto pt-20 pb-16"),
+					H2(Class("my-8 text-center text-4xl leading-normal font-bold"), Text(title)),
 					Group(children),
 				),
 			),
 			Footer(
-				Class("py-12 bg-surface"),
+				Class("bg-surface py-12"),
 				Div(Class("container mx-auto text-center"),
 					Raw("&copy; 2026 by Karol Moroz. This project is licensed under the BSD-3 license."),
 				),
