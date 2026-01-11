@@ -50,6 +50,9 @@ func CommentForm(post *types.PostDetailsDto) Node {
 			Rows:     6,
 			Class:    "font-mono",
 		}),
+		Section(
+			El("altcha-widget", Attr("challengeurl", "/api/v1/challenge"), ID("altcha")),
+		),
 		Button(
 			Type("submit"),
 			Class("w-full bg-primary text-inherit flex h-12 font-bold text-center items-center justify-center rounded-sm dark:hover:bg-blue-700 cursor-pointer transition-all text-base"),
@@ -91,6 +94,7 @@ func CommentSection(post *types.PostDetailsDto) Node {
 
 func Show(post *types.PostDetailsDto) Node {
 	return layout.BaseLayout(post.Title,
+		Script(Type("module"), Src("/assets/app.mjs")),
 		Header(
 			Class("text-center my-6 opacity-80"),
 			P(

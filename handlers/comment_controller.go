@@ -13,17 +13,20 @@ import (
 	"github.com/moroz/go-altcha-video/types"
 )
 
-var formDecoder = schema.NewDecoder()
-
 type commentController struct {
 	PostService    *services.PostService
 	CommentService *services.CommentService
+	SchemaDecoder  *schema.Decoder
 }
 
 func CommentController(db queries.DBTX) *commentController {
+	decoder := schema.NewDecoder()
+	decoder.IgnoreUnknownKeys(true)
+
 	return &commentController{
 		PostService:    services.NewPostService(db),
 		CommentService: services.NewCommentService(db),
+		SchemaDecoder:  decoder,
 	}
 }
 
@@ -34,7 +37,7 @@ func (me *commentController) Create(c echo.Context) error {
 	}
 
 	var params types.CreateCommentParams
-	err = formDecoder.Decode(&params, form)
+	err = me.SchemaDecoder.Decode(&params, form)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err)
 	}

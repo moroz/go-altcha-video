@@ -10,6 +10,7 @@
 	--color-surface: var(--color-slate-100);
 	--color-border: var(--color-slate-800);
 	--color-primary: var(--color-blue-800);
+
 }
 
 @variant dark {
@@ -23,6 +24,7 @@
 @layer base {
 	html {
 		scrollbar-gutter: stable;
+    --altcha-max-width: 20rem;
 	}
 
 	body {
