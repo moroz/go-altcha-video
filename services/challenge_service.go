@@ -29,8 +29,13 @@ func NewChallengeService(db queries.DBTX, hmacKey []byte) *ChallengeService {
 var ErrChallengeReplay = errors.New("challenge solution has already been submitted")
 var ErrInvalidSolution = errors.New("invalid solution")
 var ErrNoExpirationTime = errors.New("expiration time not found in payload")
+var ErrNoSolution = errors.New("no solution provided")
 
 func (s *ChallengeService) ValidateChallenge(ctx context.Context, payload string) (bool, error) {
+	if payload == "" {
+		return false, ErrNoSolution
+	}
+
 	hash := sha256.Sum256([]byte(payload))
 	if used, _ := s.queries.CheckUsedAltchaChallenge(ctx, hash[:]); used {
 		return false, ErrChallengeReplay

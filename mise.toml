@@ -10,9 +10,11 @@ sqlite = "latest"
 
 [env]
 DATABASE_URL = "./db/dev.db"
+TEST_DATABASE_URL = "./db/test.db"
 GOOSE_DBSTRING = "{{ env.DATABASE_URL }}"
 GOOSE_MIGRATION_DIR = "db/migrations"
 GOOSE_DRIVER = "sqlite"
+PROJECT_ROOT = "{{ config_root }}"
 
 [tasks."db:setup"]
 run = """
@@ -26,8 +28,20 @@ rm db/dev.db
 mise r db:setup
 """
 
+[tasks."db:test:prepare"]
+run = """
+rm -f db/test.db
+env GOOSE_DBSTRING=$TEST_DATABASE_URL goose up
+"""
+
 [tasks."db:seed"]
 run = "sqlite3 $DATABASE_URL < db/seeds.sql"
 
 [tasks.format]
 run = "scripts/format-classes.mjs tmpl/**/*.go"
+
+[tasks.test]
+run = """
+mise r db:test:prepare
+go test -v ./...
+"""
