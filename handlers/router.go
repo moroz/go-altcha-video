@@ -24,7 +24,7 @@ func Router(db queries.DBTX) *echo.Echo {
 
 	comments := CommentController(db)
 	g := r.Group("")
-	g.Use(ValidateAltcha(config.AltchaHMACKey))
+	g.Use(ValidateAltcha(db, config.AltchaHMACKey))
 	g.POST("/blog/:slug/comments", comments.Create)
 
 	return r

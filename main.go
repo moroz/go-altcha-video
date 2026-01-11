@@ -1,10 +1,12 @@
 package main
 
 import (
+	"context"
 	"database/sql"
 	"log"
 
 	"github.com/moroz/go-altcha-video/config"
+	"github.com/moroz/go-altcha-video/db/queries"
 	"github.com/moroz/go-altcha-video/handlers"
 	_ "modernc.org/sqlite"
 )
@@ -14,6 +16,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	queries.New(db).VacuumUsedChallenges(context.Background())
 
 	e := handlers.Router(db)
 
