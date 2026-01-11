@@ -3,6 +3,7 @@ package handlers
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"github.com/moroz/go-altcha-video/config"
 	"github.com/moroz/go-altcha-video/db/queries"
 )
 
@@ -19,6 +20,9 @@ func Router(db queries.DBTX) *echo.Echo {
 
 	comments := CommentController(db)
 	r.POST("/blog/:slug/comments", comments.Create)
+
+	altcha := AltchaController(config.AltchaHMACKey)
+	r.GET("/api/v1/challenge", altcha.Challenge)
 
 	return r
 }

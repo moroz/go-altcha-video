@@ -13,6 +13,7 @@ DATABASE_URL = "./db/dev.db"
 GOOSE_DBSTRING = "{{ env.DATABASE_URL }}"
 GOOSE_MIGRATION_DIR = "db/migrations"
 GOOSE_DRIVER = "sqlite"
+ALTCHA_HMAC_KEY = "ydeRgd3IsPk+2SVFHinBNOMjXD6v+KXnll+3/VYNN/M="
 
 [tasks."db:setup"]
 run = """

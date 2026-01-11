@@ -10,6 +10,7 @@ require (
 
 require (
 	github.com/Oudwins/tailwind-merge-go v0.2.1 // indirect
+	github.com/altcha-org/altcha-lib-go v1.0.0 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/gomarkdown/markdown v0.0.0-20250810172220-2e2c11897d1a // indirect
 	github.com/google/uuid v1.6.0 // indirect
