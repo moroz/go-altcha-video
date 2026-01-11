@@ -13,6 +13,7 @@ func RootLayout(title string, children ...Node) Node {
 			Meta(Name("viewport"), Content("width=device-width, initial-scale=1")),
 			TitleEl(Text(title+" | Altcha Demo")),
 			Link(Rel("stylesheet"), Href("/assets/output.css")),
+			Script(Type("module"), Src("/assets/app.mjs")),
 		),
 		Body(Group(children)),
 	)

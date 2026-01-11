@@ -50,9 +50,12 @@ func CommentForm(post *types.PostDetailsDto) Node {
 			Rows:     6,
 			Class:    "font-mono",
 		}),
+		Section(
+			El("altcha-widget", Attr("challengeurl", "/api/challenge"), Lang("en-US")),
+		),
 		Button(
 			Type("submit"),
-			Class("w-full bg-primary text-inherit flex h-12 font-bold text-center items-center justify-center rounded-sm dark:hover:bg-blue-700 cursor-pointer transition-all text-base"),
+			Class("w-full bg-primary flex h-12 font-bold text-center items-center justify-center rounded-sm hover:bg-primary-hover cursor-pointer transition-all text-base text-white dark:text-black"),
 			Text("Submit"),
 		),
 	)
@@ -76,7 +79,7 @@ func CommentSection(post *types.PostDetailsDto) Node {
 						Iff(comment.Website != nil && *comment.Website != "", func() Node {
 							return Group{
 								Text(" ("),
-								A(Class("text-blue-400 underline underline-offset-2 hover:text-blue-500 transition-all"), Href(*comment.Website), Target("_blank"), Rel("noopener noreferrer"), Text("website")),
+								A(Class("text-primary underline underline-offset-2 hover:text-primary-hover transition-all"), Href(*comment.Website), Target("_blank"), Rel("noopener noreferrer"), Text("website")),
 								Text(")"),
 							}
 						}),

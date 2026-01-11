@@ -29,3 +29,10 @@ type Post struct {
 	CreatedAt   dbtypes.UnixTimestamp
 	UpdatedAt   dbtypes.UnixTimestamp
 }
+
+type UsedAltchaChallenge struct {
+	ID            int64
+	ChallengeHash []byte
+	ExpiresAt     dbtypes.UnixTimestamp
+	CreatedAt     dbtypes.UnixTimestamp
+}
